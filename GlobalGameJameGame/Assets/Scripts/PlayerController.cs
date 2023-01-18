@@ -40,12 +40,11 @@ public class PlayerController : MonoBehaviour
     {
         //updates player's horizontal velocity
         rigidbody.velocity = new Vector2((direction.x * speed * Time.deltaTime), rigidbody.velocity.y);
-        //Debug.Log(rigidbody.velocity.y);
+        Debug.Log(rigidbody.velocity.y);
     }
     // Update is called once per frame
     void Update()
     {
-        
         direction = playerControls.ReadValue<Vector2>();
 
 
@@ -73,10 +72,20 @@ public class PlayerController : MonoBehaviour
         {
             
             rigidbody.AddForce(new Vector2(0, jumpHeight));
-            canJump = false;
+            //canJump = false;
         }
-        
+
     }
+    //Jump adjustment
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        canJump = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        canJump = false;
+    }
+
 
     private void OnEnable()
     {
