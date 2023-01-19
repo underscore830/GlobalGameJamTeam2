@@ -3374,6 +3374,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4977784543873619025, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
+      propertyPath: m_GravityScale
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4977784543873619027, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3417,6 +3421,14 @@ PrefabInstance:
     - target: {fileID: 4977784543873619027, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977784543873619030, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
+      propertyPath: speed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977784543873619030, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
+      propertyPath: jumpHeight
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4977784543873619031, guid: b66e24e63e89d6140a734201c8ff8b1f, type: 3}
       propertyPath: m_Name
