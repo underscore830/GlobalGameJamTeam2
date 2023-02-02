@@ -12,6 +12,15 @@ public class PlayerController : MonoBehaviour
     private float speed;
     [SerializeField]
     private float jumpHeight;
+    [SerializeField]
+    private float dashSpeed;
+    [SerializeField]
+    private float dashLength;
+    private bool isDashing;
+    private bool canDash;
+   
+    [SerializeField]
+    private float dashCooldown;
     public new Rigidbody2D rigidbody;
     private bool canJump = true;
 
@@ -34,13 +43,18 @@ public class PlayerController : MonoBehaviour
         //Animation move
         playerPosPre = 0f;
 
+        isDashing = false;
+        canDash = true;
+
     }
 
     private void FixedUpdate()
     {
         //updates player's horizontal velocity
         rigidbody.velocity = new Vector2((direction.x * speed * Time.deltaTime), rigidbody.velocity.y);
-        Debug.Log(rigidbody.velocity.y);
+       
+
+        Debug.Log(rigidbody.velocity.x);
     }
     // Update is called once per frame
     void Update()
@@ -76,11 +90,68 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    private void OnDash(InputValue value)
+    {
+        direction = playerControls.ReadValue<Vector2>();
+       
+        /*
+        if(direction.x == 0)
+        {
+            rigidbody.AddForce(Vector2.right * dashSpeed);
+        }
+        else
+        {
+            rigidbody.AddForce(direction * dashSpeed);
+        }
+        */
+
+        if (canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        
+            isDashing = true;
+            canDash = false;
+
+            float originalGravity = rigidbody.gravityScale;
+            //keeps the player's vertical height constant while dashing
+            rigidbody.gravityScale = 0.0f;
+
+        //if the player has no horizontal direction dashes them to the right
+            if (direction.x == 0)
+            {
+                rigidbody.AddForce(new Vector2(dashSpeed, 0));
+               
+            }
+            else
+            { 
+               rigidbody.AddForce(new Vector2((direction.x * dashSpeed), 0.0f));
+            }
+            
+
+            //waits until the end of the player's dash
+            yield return new WaitForSeconds(dashLength);
+            //resets gravity so player can fall after dashing
+            rigidbody.gravityScale = originalGravity;
+            isDashing = false;
+
+            //cooldown
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
+    }
+
+    
+
     //Jump adjustment
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        canJump = true;
+    canJump = true;
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         canJump = false;
