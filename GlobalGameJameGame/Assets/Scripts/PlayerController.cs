@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
     //Jump adjustment
     private void OnCollisionEnter2D(Collision2D collision)
     {
-    canJump = true;
+        canJump = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
