@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public new Rigidbody2D rigidbody;
     private bool canJump = true;
 
+    private Vector2 respawnPoint;
 
     //Animation move
     private bool isRunning = false;
@@ -37,6 +38,12 @@ public class PlayerController : MonoBehaviour
         set { canJump = value; }
     }
 
+    public Vector2 RespawnPoint
+    {
+        get { return respawnPoint; }
+        set { respawnPoint = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +53,8 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         canDash = true;
 
+        respawnPoint = new Vector2(rigidbody.position.x, rigidbody.position.y);
+
     }
 
     private void FixedUpdate()
@@ -54,7 +63,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = new Vector2((direction.x * speed * Time.deltaTime), rigidbody.velocity.y);
        
 
-        Debug.Log(rigidbody.velocity.x);
+        //Debug.Log(rigidbody.velocity.x);
     }
     // Update is called once per frame
     void Update()
