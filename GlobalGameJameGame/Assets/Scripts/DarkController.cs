@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class DarkController : MonoBehaviour
 {
     public PlayerController playerController;
-    public Image image;
+    public Light2D globalLight;
     public float darkSpeed = 0.01f,countTimeDark = 30, lightSpeed = 0.1f, countTimeLight = 10;
     private bool isWater;
     bool inCoroutine, inLighting = false, inDarking =false;
-    public GameObject lightMeterUI;
+    public Image lightMeterUI;
 
     private void Start()
     {
@@ -18,6 +19,9 @@ public class DarkController : MonoBehaviour
     }
     private void Update()
     {
+        globalLight.intensity = lightMeterUI.fillAmount;
+        //Debug.Log(globalLight.intensity);
+
         if (isWater)
         {
             if (!inLighting)
@@ -53,24 +57,24 @@ public class DarkController : MonoBehaviour
 
     IEnumerator ChangeDisplay(float time,float speed,float color_a)
     {
-        image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
+        globalLight.color = new Color(globalLight.color.r, globalLight.color.g, globalLight.color.b, globalLight.color.a + speed);
         if (isWater)
         {
-            while (image.color.a >= color_a)
+            while (globalLight.color.a >= color_a)
             {
-                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
-                Debug.Log(image.color);
-                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
+                globalLight.color = new Color(globalLight.color.r, globalLight.color.g, globalLight.color.b, globalLight.color.a + speed);
+                Debug.Log(globalLight.color);
+                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - globalLight.color.a);
                 yield return new WaitForSeconds(time);
             }
         }
         else
         {
-            while (image.color.a <= color_a)
+            while (globalLight.color.a <= color_a)
             {
-                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
-                Debug.Log(image.color);
-                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
+                globalLight.color = new Color(globalLight.color.r, globalLight.color.g, globalLight.color.b, globalLight.color.a + speed);
+                Debug.Log(globalLight.color);
+                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - globalLight.color.a);
                 yield return new WaitForSeconds(time);
             }
         }
