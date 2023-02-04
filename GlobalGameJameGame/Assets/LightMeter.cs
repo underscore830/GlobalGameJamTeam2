@@ -7,9 +7,10 @@ public class LightMeter : MonoBehaviour
 {
     public Image lightMeter;
     public Image darkCanvas;
-    public void updateLightMeter(float speed)
+    public void updateLightMeter(float colorpre)
     {
-        lightMeter.fillAmount = -(darkCanvas.color.a + speed);
+        lightMeter.fillAmount = colorpre;
+        Debug.Log(lightMeter.fillAmount);
     }
 }
 

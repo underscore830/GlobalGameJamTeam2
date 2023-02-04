@@ -48,15 +48,31 @@ public class DarkController : MonoBehaviour
                 inLighting = false;
             }
         }
+        //Debug.Log(inCoroutine+"coroutine"+inDarking+"darking"+inLighting+"lighting");
     }
 
     IEnumerator ChangeDisplay(float time,float speed,float color_a)
     {
-        while (image.color.a != color_a)
+        image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
+        if (isWater)
         {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
-            lightMeterUI.GetComponent<LightMeter>().updateLightMeter(speed);
-            yield return new WaitForSeconds(time);
+            while (image.color.a >= color_a)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
+                Debug.Log(image.color);
+                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
+                yield return new WaitForSeconds(time);
+            }
+        }
+        else
+        {
+            while (image.color.a <= color_a)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
+                Debug.Log(image.color);
+                lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
+                yield return new WaitForSeconds(time);
+            }
         }
     }
 
