@@ -25,6 +25,8 @@ public class EffectSoundSource : MonoBehaviour
         }
     }
 
+    
+
     public void Volume(float v) { audioSource.volume = v; }
     public float GetVolume() { return audioSource.volume; }
 
