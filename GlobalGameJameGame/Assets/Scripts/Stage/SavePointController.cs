@@ -6,6 +6,7 @@ public class SavePointController : MonoBehaviour
 {
     [SerializeField]
     private PlayerController player;
+    public AudioClip save;
    
     bool playerHasReached;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class SavePointController : MonoBehaviour
         //if the player hasn't already made passed this checkpoint sets the respawn point to this position
         if (!playerHasReached)
         {
+            EffectSoundSource.instance.PlaySE(save);
             player.RespawnPoint = this.transform.position;
         }
            

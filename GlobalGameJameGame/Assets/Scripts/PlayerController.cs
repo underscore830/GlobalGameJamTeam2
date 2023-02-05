@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private float horizontal;//playerPosPre, 
     public GameObject obj;
 
+    //EffectSound
+    public AudioClip jump, dash, walking;
+
+
     public bool CanJump
     {
         get { return canJump; }
@@ -76,6 +80,10 @@ public class PlayerController : MonoBehaviour
         isRunning = horizontal != 0f;
         if (isRunning)
         {
+            if (canJump)
+            {
+                EffectSoundSource.instance.PlaySE(walking);
+            }
             Vector3 scale = gameObject.transform.localScale;
             if (horizontal < 0 && scale.x > 0 || horizontal > 0 && scale.x < 0)
             {
@@ -101,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
         if (canJump)
         {
-            
+            EffectSoundSource.instance.PlaySE(jump);
             rigidbody.AddForce(new Vector2(0, jumpHeight));
             //canJump = false;
         }
@@ -124,6 +132,7 @@ public class PlayerController : MonoBehaviour
 
         if (canDash)
         {
+            EffectSoundSource.instance.PlaySE(dash);
             StartCoroutine(Dash());
         }
     }

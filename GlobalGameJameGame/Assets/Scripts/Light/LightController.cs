@@ -5,6 +5,7 @@ public class LightController : MonoBehaviour
 {
     bool playerHasReached;
     new Light2D light;
+    public AudioClip lightClip;
     private void Start()
     {
         light = GetComponent<Light2D>();
@@ -18,6 +19,7 @@ public class LightController : MonoBehaviour
             {
                 light.intensity = 1;
                 playerHasReached = true;
+                EffectSoundSource.instance.PlaySE(lightClip);
             }
         }
     }
