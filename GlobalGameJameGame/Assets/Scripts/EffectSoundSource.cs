@@ -21,7 +21,7 @@ public class EffectSoundSource : MonoBehaviour
         }
         else
         {
-            Debug.Log("ƒI[ƒfƒBƒIƒ\[ƒX‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            //Debug.Log("ï¿½Iï¿½[ï¿½fï¿½Bï¿½Iï¿½\ï¿½[ï¿½Xï¿½ï¿½ï¿½İ’è‚³ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
         }
     }
 
