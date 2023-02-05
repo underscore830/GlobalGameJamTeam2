@@ -10,7 +10,7 @@ public class LightMeter : MonoBehaviour
     public void updateLightMeter(float colorpre)
     {
         lightMeter.fillAmount = colorpre;
-        Debug.Log(lightMeter.fillAmount);
+        //Debug.Log(lightMeter.fillAmount);
     }
 }
 

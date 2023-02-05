@@ -10,7 +10,7 @@ public class DarkController : MonoBehaviour
     private bool isWater;
     bool inCoroutine, inLighting = false, inDarking =false;
     public GameObject lightMeterUI;
-
+    private bool playerLighting = true;
     private void Start()
     {
         isWater = false;
@@ -48,6 +48,8 @@ public class DarkController : MonoBehaviour
                 inLighting = false;
             }
         }
+        playerLighting = image.color.a <= 1;
+
         //Debug.Log(inCoroutine+"coroutine"+inDarking+"darking"+inLighting+"lighting");
     }
 
@@ -59,7 +61,7 @@ public class DarkController : MonoBehaviour
             while (image.color.a >= color_a)
             {
                 image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
-                Debug.Log(image.color);
+                //Debug.Log(image.color);
                 lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
                 yield return new WaitForSeconds(time);
             }
@@ -69,7 +71,7 @@ public class DarkController : MonoBehaviour
             while (image.color.a <= color_a)
             {
                 image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + speed);
-                Debug.Log(image.color);
+                //Debug.Log(image.color);
                 lightMeterUI.GetComponent<LightMeter>().updateLightMeter(1 - image.color.a);
                 yield return new WaitForSeconds(time);
             }
@@ -80,4 +82,10 @@ public class DarkController : MonoBehaviour
     {
         isWater = water;
     }
+
+    public bool GetPlayerLighting()
+    {
+        return playerLighting;
+    }
+
 }

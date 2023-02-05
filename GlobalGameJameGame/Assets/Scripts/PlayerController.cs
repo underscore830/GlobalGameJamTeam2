@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator animator;
     private float playerPosPre, horizontal;
+    public GameObject obj;
 
     public bool CanJump
     {
@@ -86,6 +87,12 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsRunning", isRunning);
         animator.SetBool("IsJumpping", !canJump);
         playerPosPre = transform.position.x;
+    }
+
+    private void OnExitGame(InputValue value)
+    {
+        if (obj.activeSelf) { obj.SetActive(false); }
+        if (!obj.activeSelf) { obj.SetActive(true); }
     }
 
     private void OnJump(InputValue value)
