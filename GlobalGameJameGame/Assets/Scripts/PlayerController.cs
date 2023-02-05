@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     //EffectSound
     public AudioClip jump, dash, walking;
+    //float Mtime = 0.5f;
 
 
     public bool CanJump
@@ -80,10 +81,15 @@ public class PlayerController : MonoBehaviour
         isRunning = horizontal != 0f;
         if (isRunning)
         {
-            if (canJump)
+            /*if (canJump)
             {
-                EffectSoundSource.instance.PlaySE(walking);
-            }
+                Mtime -= Time.deltaTime;
+                if (Mtime < 0)
+                {
+                    EffectSoundSource.instance.PlaySE(walking);
+                    Mtime = 0.5f;
+                }
+            }*/
             Vector3 scale = gameObject.transform.localScale;
             if (horizontal < 0 && scale.x > 0 || horizontal > 0 && scale.x < 0)
             {
