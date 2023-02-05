@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool isRunning = false;
     [SerializeField]
     private Animator animator;
-    private float playerPosPre, horizontal;
+    private float horizontal;//playerPosPre, 
     public GameObject obj;
 
     public bool CanJump
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //Animation move
-        playerPosPre = 0f;
+        //playerPosPre = 0f;
 
         isDashing = false;
         canDash = true;
@@ -84,9 +83,11 @@ public class PlayerController : MonoBehaviour
             }
             gameObject.transform.localScale = scale;
         }
-        animator.SetBool("IsRunning", isRunning);
-        animator.SetBool("IsJumpping", !canJump);
-        playerPosPre = transform.position.x;
+        animator.SetBool("IsWalk", isRunning);
+        animator.SetBool("IsJump", !canJump);
+        animator.SetFloat("ColorLevel", GetComponentInChildren<DarkController>().lightMeterUI.fillAmount);
+        Debug.Log(CanJump);
+        //playerPosPre = transform.position.x;
     }
 
     private void OnExitGame(InputValue value)
@@ -160,17 +161,22 @@ public class PlayerController : MonoBehaviour
             canDash = true;
     }
 
-    
+
 
     //Jump adjustment
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        canJump = true;
+        CanJump = true;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        canJump = false;
+        CanJump = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        CanJump = false;
     }
 
 
