@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  save: {fileID: 8300000, guid: 9bc950f3a4f00f14ab1082fb5079043f, type: 3}
