@@ -2171,6 +2171,7 @@ MonoBehaviour:
   dashCooldown: 1
   rigidbody: {fileID: 2068973833}
   animator: {fileID: 2068973834}
+  obj: {fileID: 0}
 --- !u!212 &2068973829
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2429,7 +2430,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 5.32
+  m_PointLightOuterRadius: 6
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
